@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -14,7 +15,7 @@ func GenerateJWTToken(username string) (string, error) {
 	})
 
 	// Menandatangani token dengan secret key
-	tokenString, err := token.SignedString([]byte("your-secret-key"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("secret_key")))
 	if err != nil {
 		return "", err
 	}
